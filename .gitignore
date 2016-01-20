@@ -13,6 +13,7 @@
 !/log/.keep
 /tmp
 /log
+.idea/
 
 *.rbc
 capybara-*.html
