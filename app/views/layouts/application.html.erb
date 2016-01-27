@@ -2,16 +2,21 @@
 <html>
 <head>
   <title>Karate</title>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+<!-- Main navbar -->
+<%= render 'layouts/main_navbar' %>
+<!-- /main navbar -->
+
+<div class="container">
+
+  <%= yield %>
+
+</div>
 
 </body>
 </html>

@@ -49,3 +49,5 @@ group :development do
   gem 'spring'
 end
 
+# bootstrap
+gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
