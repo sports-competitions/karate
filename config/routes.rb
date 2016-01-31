@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   # After successful authentication redirect to user_page
   get 'users/profile'
 
-  devise_for :users
+  devise_for :users, controllers: { registrations: "registrations"}
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

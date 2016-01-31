@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
+
   enum sex: [ :male, :female ]
   enum role: [ :admin, :moderator, :user ]
 
