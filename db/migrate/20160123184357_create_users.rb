@@ -9,7 +9,6 @@ class CreateUsers < ActiveRecord::Migration
       t.integer :role, default: 2
       t.boolean :student, default: false
       t.boolean :trainer, default: false
-
       t.timestamps null: false
     end
   end

@@ -2,7 +2,7 @@ class AddDeviseToUsers < ActiveRecord::Migration
   def self.up
 
     change_column_null :users, :email, false
-    change_column_default :users, :email, from: "", to: ""
+#    change_column_default :users, :email, from: nil, to: '';
 
 
     change_table(:users) do |t|
