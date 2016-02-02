@@ -10,6 +10,10 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { registrations: "registrations"}
 
+  resources :users
+
+  post 'users/add_student_to_trainer'
+  post 'users/delete_student_from_trainer'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

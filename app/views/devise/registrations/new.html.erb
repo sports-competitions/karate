@@ -14,6 +14,16 @@
     </div>
 
     <div class="form-group">
+      <%= f.label :trainer %>
+      <%= f.check_box :trainer  %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :student %>
+      <%= f.check_box :student  %>
+    </div>
+
+    <div class="form-group">
       <%= f.label :password %>
       <% if @minimum_password_length %>
           <em>(<%= @minimum_password_length %> characters minimum)</em>
