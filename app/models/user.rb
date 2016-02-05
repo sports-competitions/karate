@@ -8,4 +8,12 @@ class User < ActiveRecord::Base
   enum role: [ :admin, :moderator, :user ]
 
   validates_presence_of :email
+
+  after_create :default_role
+
+  private
+  def default_role
+    self.role ||= 'user'
+  end
+
 end

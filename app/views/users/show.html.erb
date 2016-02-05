@@ -1,31 +1,18 @@
 <div class="user">
   <div class="name"><h1><%= @user.name %></h1></div>
   <div class="email"><%= @user.email %></div>
+
+  <% if @user == current_user and @user.trainer? %>
+    <%= link_to 'Edit', edit_user_registration_path %>
+  <% elsif @user.student and current_user.trainer? and @current_trainer.students.include?(@student) %>
+    <%= link_to 'Edit', edit_user_path %>
+  <% end %>
+
   <div>
     <span class="text-warning"><%= 'Тренер' if @user.trainer? %></span>
     <span class="text-success"><%= 'Спортсмен' if @user.student? %></span>
   </div>
-  <%= link_to 'Редактировать профиль', edit_user_registration_path %>
+  <div class="birthday"><%= @user.birthday %></div>
 
-  <% if @user.student? %>
-      <h3>Тренера:</h3>
-      <table class="table table-striped users-table">
-
-        <% @trainers.each do |trainer| %>
-            <tr>
-              <td><%= link_to trainer.name, user_path(trainer) %></td>
-            </tr>
-        <% end %>
-      </table>
-  <% end %>
-
-  <% if @user.trainer? %>
-    <h3>Спортсмены:</h3>
-    <table class="table table-striped users-table">
-      <% @students.each do |student| %>
-          <%= render partial: 'user', locals: { user: User.find(student.id) } %>
-      <% end %>
-    </table>
-  <% end %>
 
 </div>

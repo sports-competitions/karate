@@ -12,6 +12,10 @@ Rails.application.routes.draw do
 
   resources :users
 
+  as :user do
+    get "/register", to: "registrations#new", as: "register"
+  end
+
   post 'users/add_student_to_trainer'
   post 'users/delete_student_from_trainer'
   # Example of regular route:
