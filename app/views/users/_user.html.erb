@@ -6,6 +6,14 @@
     <span class="text-success"><%= 'Спортсмен' if user.student? %></span>
   </td>
   <td class="actions">
-
+    <% if current_user.trainer? and current_user != user and user.student? %>
+        <% unless @current_trainer.students.include?(Student.find(user.id)) %>
+             <%= button_to 'Добавить себе', { controller: 'users', action: 'add_student_to_trainer',
+                                              student_id: user.id, trainer_id: current_user.id }, { class: 'btn btn-success' } %>
+        <% else %>
+           <%= button_to 'Удалить из своих', { controller: 'users', action: 'delete_student_from_trainer',
+                                               student_id: user.id, trainer_id: current_user.id }, { class: 'btn btn-danger' } %>
+        <% end %>
+    <% end %>
   </td>
 </tr>

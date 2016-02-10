@@ -2,14 +2,17 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   def profile
     @user = current_user
-  end
-
-  def index
     if current_user.trainer?
       @current_trainer = Trainer.find(current_user.id)
       @students = @current_trainer.students
     end
-    if current_user.role == 'admin'
+  end
+
+  def index
+    if current_user.trainer? or current_user.role == 'admin'
+      @current_trainer = Trainer.find(current_user.id)
+      @students = @current_trainer.students
+
       @users = User.all
     end
   end

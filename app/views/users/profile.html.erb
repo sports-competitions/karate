@@ -1,2 +1,6 @@
 <h1>My profile</h1>
 
+<h2>Мои спортсмены</h2>
+<% @students.each do |student| %>
+    <%= render partial: 'student', locals: { student: student } %>
+<% end %>

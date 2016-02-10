@@ -1,15 +1,11 @@
-<% if current_user.trainer? %>
-  <h1>Мои спортсмены</h1>
+<% if current_user.trainer? or current_user.role == 'admin'%>
+  <h1>Все пользователи</h1>
 <% end %>
 
 <table class="table table-striped users-table">
-  <% if current_user.role == 'admin' %>
+  <% if current_user.role == 'admin' or current_user.trainer? %>
     <%= render @users %>
-  <% elsif current_user.trainer? %>
-    <%= link_to 'Добавить спортсмена', new_user_path, class: 'btn btn-success' %>
-    <% @students.each do |student| %>
-      <%= render partial: 'student', locals: { student: student } %>
-    <% end %>
+
   <% end %>
 
 </table>
