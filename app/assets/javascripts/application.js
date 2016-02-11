@@ -16,3 +16,16 @@
 //= require bootstrap/dropdown
 //= require turbolinks
 //= require_tree .
+
+
+
+var ready;
+ready = function () {
+    $('.show-my-sportsmen').click(function(e) {
+        e.preventDefault();
+        $('.my-sportsmen').show();
+    });
+};
+
+$(document).ready(ready);
+$(document).on('page:load', ready);

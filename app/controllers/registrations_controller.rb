@@ -10,7 +10,7 @@ class RegistrationsController < Devise::RegistrationsController
 
           resource_student = User.new(sign_up_params)
           resource_student.student = true
-
+         
           if resource_student.save
 
             current_trainer = Trainer.find(current_user.id)

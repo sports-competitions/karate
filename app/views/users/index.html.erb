@@ -3,7 +3,7 @@
 <% end %>
 
 <table class="table table-striped users-table">
-  <% if current_user.role == 'admin' or current_user.trainer? %>
+  <% if current_user.role == 'admin' %>
     <%= render @users %>
 
   <% end %>
