@@ -10,7 +10,7 @@
     </div>
     <div class="col-sm-3">
 
-      <%= link_to '#', class: 'profile-menu-link' do %>
+      <%= link_to new_student_path, class: 'profile-menu-link' do %>
         <i class="fa fa-user-plus"></i>
         <p>Новый спортсмен</p>
       <% end %>
@@ -21,9 +21,26 @@
 
 <div class="my-sportsmen">
   <h3>Мои спортсмены</h3>
-  <table class="table table-striped">
-    <% @students.each do |student| %>
-        <%= render partial: 'student', locals: { student: student } %>
-    <% end %>
-  </table>
+  <% if @students.present? %>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <td>Имя</td>
+          <td>Дата рождения</td>
+          <td>Вес</td>
+          <td>Пол</td>
+          <td></td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <% @students.each do |student| %>
+            <%= render partial: 'students/student', locals: { student: student } %>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>У вас еще нету спортсменов</p>
+  <% end %>
+
 </div>

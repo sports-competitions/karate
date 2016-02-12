@@ -7,7 +7,6 @@
     <div id="navbar">
       <ul class="nav navbar-nav">
         <li><%= link_to 'Home', root_path %></li>
-        <li><%= link_to 'Пользователи', users_path %></li>
       </ul>
       <ul class="nav navbar-nav pull-right">
         <% if trainer_signed_in? %>
@@ -22,6 +21,8 @@
                   <li><%= link_to 'Cities', cities_path %></li>
                   <li><%= link_to 'Sports', sports_path %></li>
                   <li><%= link_to 'Qualifications', qualifications_path %></li>
+                  <li><%= link_to 'Trainers', trainers_path %></li>
+                  <li><%= link_to 'Sportsman', students_path %></li>
                 <% end %>
                 <li><%= link_to 'Log out', destroy_trainer_session_path, method: :delete %></li>
               </ul>

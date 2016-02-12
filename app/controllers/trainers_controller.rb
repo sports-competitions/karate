@@ -1,5 +1,7 @@
 class TrainersController < ApplicationController
   before_action :authenticate_trainer!
+  before_action :set_current_trainer
+  before_action :admin_only, only: :index
 
   def profile
     if current_trainer.present?
@@ -12,63 +14,41 @@ class TrainersController < ApplicationController
   end
 
   def index
-    if current_trainer.present?
-      @current_trainer = current_trainer
-      @students = @current_trainer.students
-    end
-
-    if current_trainer.role == 'admin'
-      @users = User.all
-    else
-      redirect_to root_path, alert: 'You have not access'
-    end
+    @trainers = Trainer.all
   end
 
   def show
-    @user = User.find(params[:id])
-    if current_trainer.present?
-      @current_trainer = Trainer.find(current_user.id)
-    end
-
-    if @user.trainer?
-      @trainer = Trainer.find(@user.id)
-      @students = @trainer.students
-    end
-
-    if @user.student?
-      @student = Student.find(@user.id)
-      @trainers = @student.trainers
-    end
+    @trainer = Trainer.find(params[:id])
   end
-
-  def new
-    @user = User.new
-    unless current_user.trainer?
-      redirect_to root_path, alert: 'You have not permission'
-    end
-  end
-
-  def edit
-    @user = User.find(params[:id])
-  end
-
-  def update
-    @user = User.find(params[:id])
-    if @user.update_attributes(user_params)
-      redirect_to user_url, notice: "Updated User."
-    else
-      render :edit
-    end
-  end
-
-  def create
-    @user = User.new(user_params)
-    if @user.save
-      redirect_to root_path, notice: "User succesfully created!"
-    else
-      render :new
-    end
-  end
+  #
+  # def new
+  #   @user = User.new
+  #   unless current_user.trainer?
+  #     redirect_to root_path, alert: 'You have not permission'
+  #   end
+  # end
+  #
+  # def edit
+  #   @user = User.find(params[:id])
+  # end
+  #
+  # def update
+  #   @user = User.find(params[:id])
+  #   if @user.update_attributes(user_params)
+  #     redirect_to user_url, notice: "Updated User."
+  #   else
+  #     render :edit
+  #   end
+  # end
+  #
+  # def create
+  #   @user = User.new(user_params)
+  #   if @user.save
+  #     redirect_to root_path, notice: "User succesfully created!"
+  #   else
+  #     render :new
+  #   end
+  # end
 
 
   def add_student_to_trainer

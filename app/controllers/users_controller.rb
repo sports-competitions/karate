@@ -1,27 +1,17 @@
 class UsersController < ApplicationController
-  #before_action :authenticate_user!
-  def profile
-    @user = current_user
-    if current_user.trainer?
-      @current_trainer = Trainer.find(current_user.id)
-      @students = @current_trainer.students
-    end
-  end
+  before_action :authenticate_trainer!
+  before_action :admin_only, only: :index
+  before_action :set_current_trainer
 
   def index
-    if current_user.trainer? or current_user.role == 'admin'
-      @current_trainer = Trainer.find(current_user.id)
+      @current_trainer = current_trainer
       @students = @current_trainer.students
-
       @users = User.all
-    end
   end
 
   def show
     @user = User.find(params[:id])
-    if current_user.trainer?
-      @current_trainer = Trainer.find(current_user.id)
-    end
+    @current_trainer = current_trainer
 
     if @user.trainer?
       @trainer = Trainer.find(@user.id)
@@ -33,36 +23,6 @@ class UsersController < ApplicationController
       @trainers = @student.trainers
     end
   end
-
-  def new
-    @user = User.new
-    unless current_user.trainer?
-      redirect_to root_path, alert: 'You have not permission'
-    end
-  end
-
-  def edit
-    @user = User.find(params[:id])
-  end
-
-  def update
-    @user = User.find(params[:id])
-    if @user.update_attributes(user_params)
-      redirect_to user_url, notice: "Updated User."
-    else
-      render :edit
-    end
-  end
-
-  def create
-    @user = User.new(user_params)
-    if @user.save
-      redirect_to root_path, notice: "User succesfully created!"
-    else
-      render :new
-    end
-  end
-
 
   def add_student_to_trainer
     student = Student.find(params[:student_id])

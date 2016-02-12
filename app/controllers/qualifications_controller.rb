@@ -1,5 +1,6 @@
 class QualificationsController < ApplicationController
   before_action :set_qualification, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_trainer!
   before_action :admin_only
   before_action :get_collect_sports, except: [:index, :show, :destroy]
 

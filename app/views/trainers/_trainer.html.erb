@@ -1,0 +1,11 @@
+<tr>
+  <td><%= link_to trainer.name, trainer %></td>
+  <td><%= trainer.email %></td>
+  <td>
+    <span class="text-warning">Тренер</span>
+    <span class="text-success"><%= 'Спортсмен' if trainer.student? %></span>
+  </td>
+  <td class="actions">
+
+  </td>
+</tr>

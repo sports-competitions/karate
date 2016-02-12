@@ -1,4 +1,5 @@
 class SportsController < ApplicationController
+  before_action :authenticate_trainer!
   before_action :set_sport, only: [:show, :edit, :update, :destroy]
   before_action :admin_only
 
