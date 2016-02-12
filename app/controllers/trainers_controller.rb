@@ -1,23 +1,23 @@
 class TrainersController < ApplicationController
-  #before_action :authenticate_user!
+  before_action :authenticate_trainer!
 
   def profile
-    #if current_user.present?
-      @current_trainer = Trainer.find(current_trainer.id)
+    if current_trainer.present?
+      @current_trainer = current_trainer
       @students = @current_trainer.students
-    #end
+    end
     #if current_user.student?
-      @current_student = Student.find(current_user.id)
+      #@current_student = Student.find(current_user.id)
     #end
   end
 
   def index
-    if current_user.trainer?
-      @current_trainer = Trainer.find(current_user.id)
+    if current_trainer.present?
+      @current_trainer = current_trainer
       @students = @current_trainer.students
     end
 
-    if current_user.role == 'admin'
+    if current_trainer.role == 'admin'
       @users = User.all
     else
       redirect_to root_path, alert: 'You have not access'
@@ -26,7 +26,7 @@ class TrainersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    if current_user.trainer?
+    if current_trainer.present?
       @current_trainer = Trainer.find(current_user.id)
     end
 

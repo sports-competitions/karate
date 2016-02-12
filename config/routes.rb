@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   resources :qualifications
   resources :sports
   resources :cities
@@ -9,13 +10,15 @@ Rails.application.routes.draw do
   root 'pages#index'
 
   # After successful authentication redirect to user_page
-  get 'users/profile'
+  get 'trainers/profile'
 
-  devise_for :users, controllers: { registrations: "registrations"}
+  devise_for :trainers, controllers: { registrations: "registrations"}
 
   resources :users
+  resources :trainers
+  resources :students
 
-  as :user do
+  as :trainer do
     get "/register", to: "registrations#new", as: "register"
   end
 

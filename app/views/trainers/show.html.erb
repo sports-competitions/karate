@@ -1,0 +1,18 @@
+<div class="user">
+  <div class="name"><h1><%= @user.name %></h1></div>
+  <div class="email"><%= @user.email %></div>
+
+  <% if @user == current_user and @user.trainer? %>
+    <%= link_to 'Edit', edit_user_registration_path %>
+  <% elsif @user.student and current_user.trainer? and @current_trainer.students.include?(@student) %>
+    <%= link_to 'Edit', edit_user_path %>
+  <% end %>
+
+  <div>
+    <span class="text-warning"><%= 'Тренер' if @user.trainer? %></span>
+    <span class="text-success"><%= 'Спортсмен' if @user.student? %></span>
+  </div>
+  <div class="birthday"><%= @user.birthday %></div>
+
+
+</div>
