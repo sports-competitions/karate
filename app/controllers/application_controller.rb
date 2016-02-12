@@ -15,4 +15,14 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:account_update) << :name
   end
 
+  def admin_only
+    unless current_user.admin?
+      redirect_to :back, notice: "Access denied"
+    end
+  end
+
+  def get_collect_sports
+    @sports = Sport.all
+  end
+
 end
