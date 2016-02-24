@@ -1,21 +1,21 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
-  def profile
-  end
+  before_action :authenticate_trainer!
+  before_action :admin_only, only: :index
+  before_action :set_current_trainer
 
   def index
-    @users = User.all
-    if current_user.trainer?
-      @current_trainer = Trainer.find(current_user.id)
-    end
+      @current_trainer = current_trainer
+      @students = @current_trainer.students
+      @users = User.all
   end
 
   def show
     @user = User.find(params[:id])
+    @current_trainer = current_trainer
+
     if @user.trainer?
       @trainer = Trainer.find(@user.id)
       @students = @trainer.students
-      @current_trainer = Trainer.find(current_user.id)
     end
 
     if @user.student?
@@ -45,4 +45,11 @@ class UsersController < ApplicationController
       redirect_to :back, alert: "Ошибка"
     end
   end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+
 end

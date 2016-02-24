@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -6,11 +8,20 @@ Rails.application.routes.draw do
   root 'pages#index'
 
   # After successful authentication redirect to user_page
-  get 'users/profile'
+  get 'trainers/profile'
 
-  devise_for :users, controllers: { registrations: "registrations"}
+  devise_for :trainers, controllers: { registrations: "registrations"}
 
-  resources :users
+  #resources :users
+  resources :trainers
+  resources :students
+  resources :qualifications
+  resources :sports
+  resources :cities
+
+  as :trainer do
+    get "/register", to: "registrations#new", as: "register"
+  end
 
   post 'users/add_student_to_trainer'
   post 'users/delete_student_from_trainer'
