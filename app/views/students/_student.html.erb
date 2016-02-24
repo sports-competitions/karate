@@ -1,0 +1,16 @@
+<tr>
+  <td><%= link_to student.name, student %></td>
+  <td><%= student.birthday %></td>
+  <td><%= student.weight %></td>
+  <td><%= student.sex %></td>
+  <td>
+    <span class="text-warning"><%= 'Тренер' if student.trainer? %></span>
+    <span class="text-success"><%= 'Спортсмен' if student.student? %></span>
+  </td>
+  <td class="actions">
+     <% if @current_trainer.students.include?(student) %>
+        <%= button_to 'Удалить из своих', { controller: 'users', action: 'delete_student_from_trainer',
+                                            student_id: student.id, trainer_id: current_trainer.id }, { class: 'btn btn-danger' } %>
+    <% end %>
+  </td>
+</tr>

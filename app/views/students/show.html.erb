@@ -1,0 +1,34 @@
+<div class="user">
+  <% if @student.id == @current_trainer.id %>
+      <%= link_to 'Edit', edit_trainer_registration_path, class: 'btn btn-warning' %>
+  <% elsif @current_trainer.students.include?(@student) %>
+      <%= link_to 'Edit', edit_student_path(@student), class: 'btn btn-warning'  %>
+  <% end %>
+
+  <table class="table">
+    <tr>
+      <td>Имя: </td>
+      <td class="name"><%= @student.name %></td>
+    </tr>
+    <tr>
+      <td>Кто: </td>
+      <td>
+        <span class="text-warning"><%= 'Тренер' if @student.trainer? %></span>
+        <span class="text-success"><%= 'Спортсмен' if @student.student? %></span>
+      </td>
+    </tr>
+    <tr>
+      <td>Пол: </td>
+      <td><%= @student.sex %></td>
+    </tr>
+    <tr>
+      <td>Дата рождения: </td>
+      <td class="birthday"><%= @student.birthday %></td>
+    </tr>
+    <tr>
+      <td>Вес: </td>
+      <td class="weight"><%= @student.weight %></td>
+    </tr>
+  </table>
+
+</div>

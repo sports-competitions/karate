@@ -4,8 +4,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+
   def after_sign_in_path_for(resource)
-    users_profile_path
+    trainers_profile_path
   end
 
   protected
@@ -16,7 +17,8 @@ class ApplicationController < ActionController::Base
   end
 
   def admin_only
-    unless current_user.admin?
+    # unless current_user.admin?
+    unless current_trainer.admin?
       redirect_to :back, notice: "Access denied"
     end
   end
@@ -25,4 +27,10 @@ class ApplicationController < ActionController::Base
     @sports = Sport.all
   end
 
+  def set_current_trainer
+    @current_trainer = current_trainer
+  end
+  # def current_user
+  #   @current_user = current_trainer
+  # end
 end
