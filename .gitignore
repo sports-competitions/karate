@@ -13,14 +13,7 @@ capybara-*.html
 rerun.txt
 pickle-email-*.html
 
-# TODO Comment out these rules if you are OK with secrets being uploaded to the repo
-config/initializers/secret_token.rb
-config/secrets.yml
-config/database.yml
-config/environment_variables.yml
-
-/db/schema.rb
-## Environment normalization:
+## Environment normalisation:
 /.bundle
 /vendor/bundle
 
@@ -84,5 +77,4 @@ atlassian-ide-plugin.xml
 com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
-
 
