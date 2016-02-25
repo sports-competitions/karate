@@ -53,6 +53,3 @@ gem 'devise', '~> 3.5', '>= 3.5.5'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 # font-awesome icons
 gem 'font-awesome-rails'
-
-# bootstrap scaffold templates
-gem 'bootstrap-generators', '~> 3.3.4'
