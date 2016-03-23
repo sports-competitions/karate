@@ -11,10 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160323001147) do
+ActiveRecord::Schema.define(version: 20160323001148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "people", force: :cascade do |t|
+    t.integer  "registrator_id"
+    t.string   "first_name",     default: "", null: false
+    t.string   "middle_name",    default: "", null: false
+    t.string   "last_name",      default: "", null: false
+    t.date     "birthday",                    null: false
+    t.string   "sex",            default: "", null: false
+    t.string   "kind",           default: "", null: false
+    t.string   "kind_data"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "people", ["registrator_id"], name: "index_people_on_registrator_id", using: :btree
 
   create_table "registrators", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -43,4 +58,5 @@ ActiveRecord::Schema.define(version: 20160323001147) do
   add_index "registrators", ["email"], name: "index_registrators_on_email", unique: true, using: :btree
   add_index "registrators", ["reset_password_token"], name: "index_registrators_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "people", "registrators"
 end

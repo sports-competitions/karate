@@ -4,5 +4,7 @@ class Registrator < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
+  has_many :people
+
   validates_presence_of :first_name, :middle_name, :last_name
 end
