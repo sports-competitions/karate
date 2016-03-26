@@ -19,6 +19,7 @@ class PeopleController < ApplicationController
 
   # GET /people/1/edit
   def edit
+    authorize! :update, @person
   end
 
   # POST /people
@@ -54,6 +55,7 @@ class PeopleController < ApplicationController
   # DELETE /people/1
   # DELETE /people/1.json
   def destroy
+    authorize! :destroy, @person
     @person.destroy
     respond_to do |format|
       format.html { redirect_to people_url, notice: 'Person was successfully destroyed.' }

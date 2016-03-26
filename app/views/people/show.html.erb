@@ -12,7 +12,7 @@
 
 <dl class="dl-horizontal">
   <dt>Registrator:</dt>
-  <dd><%= @person.registrator %></dd>
+  <dd><%= "#{@person.registrator.last_name} #{@person.registrator.first_name}" %></dd>
 
   <dt>First name:</dt>
   <dd><%= @person.first_name %></dd>

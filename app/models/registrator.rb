@@ -7,4 +7,7 @@ class Registrator < ActiveRecord::Base
   has_many :people
 
   validates_presence_of :first_name, :middle_name, :last_name
+
+  enum sex: [ :male, :female ]
+  enum role: [ :owner, :admin ]
 end

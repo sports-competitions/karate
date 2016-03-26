@@ -34,6 +34,9 @@
           <li class="active"><a href="#">Home</a></li>
           <%= render 'devise/menu/registration_items' %>
           <%= render 'devise/menu/login_items' %>
+          <% if current_registrator.present? %>
+            <li><%= link_to 'People', people_path %></li>
+          <% end %>
         </ul>
       </div>
     </div>

@@ -26,7 +26,7 @@
 
     <tbody>
       <%= content_tag_for(:tr, @people) do |person| %>
-            <td><%= person.registrator %></td>
+            <td><%= person.registrator.last_name %></td>
             <td><%= person.first_name %></td>
             <td><%= person.middle_name %></td>
             <td><%= person.last_name %></td>
@@ -35,8 +35,15 @@
             <td><%= person.kind %></td>
             <td><%= person.kind_data %></td>
             <td><%= link_to 'Show', person %></td>
-        <td><%= link_to 'Edit', edit_person_path(person) %></td>
-        <td><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <% if can? :update, person %>
+            <%= link_to 'Edit', edit_person_path(person) %>
+          <% end %>
+        </td>
+        <td>
+          <% if can? :destroy, person %>
+            <%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
       <% end %>
     </tbody>
   </table>
