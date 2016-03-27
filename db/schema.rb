@@ -22,8 +22,9 @@ ActiveRecord::Schema.define(version: 20160327123915) do
     t.date     "start_date"
     t.date     "end_date"
     t.text     "details"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.json     "team_structure", default: []
   end
 
   create_table "people", force: :cascade do |t|

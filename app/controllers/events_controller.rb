@@ -17,6 +17,7 @@ class EventsController < ApplicationController
   def new
     authorize! :create, Event
     @event = Event.new
+    @event.build_team_structure
   end
 
   # GET /events/1/edit
@@ -75,6 +76,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :address, :start_date, :end_date, :details)
+      params.require(:event).permit(:name, :address, :start_date, :end_date, :details, team_structure_attributes: [:sportsmen, :judges, :trainers, :delegates])
     end
 end
