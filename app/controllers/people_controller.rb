@@ -1,20 +1,22 @@
 class PeopleController < ApplicationController
+  before_action :authenticate_registrator!
   before_action :set_person, only: [:show, :edit, :update, :destroy]
 
   # GET /people
   # GET /people.json
   def index
-    @people = Person.all
+    @people = current_registrator.people
   end
 
   # GET /people/1
   # GET /people/1.json
   def show
+    authorize! :read, @person
   end
 
   # GET /people/new
   def new
-    @person = Person.new
+    @person = current_registrator.people.build
   end
 
   # GET /people/1/edit
@@ -25,8 +27,7 @@ class PeopleController < ApplicationController
   # POST /people
   # POST /people.json
   def create
-    @person = Person.new(person_params)
-    authorize! :create, @person
+    @person = current_registrator.people.build(person_params)
 
     respond_to do |format|
       if @person.save
@@ -42,6 +43,7 @@ class PeopleController < ApplicationController
   # PATCH/PUT /people/1
   # PATCH/PUT /people/1.json
   def update
+    authorize! :update, @person
     respond_to do |format|
       if @person.update(person_params)
         format.html { redirect_to @person, notice: 'Person was successfully updated.' }
@@ -72,6 +74,6 @@ class PeopleController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def person_params
-      params.require(:person).permit(:registrator_id, :first_name, :middle_name, :last_name, :birthday, :sex, :kind, :kind_data)
+      params.require(:person).permit(:first_name, :middle_name, :last_name, :birthday, :sex, :kind, :kind_data)
     end
 end
