@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  before_action :authenticate_registrator!, except: [:index, :show]
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   # GET /events
@@ -14,19 +15,21 @@ class EventsController < ApplicationController
 
   # GET /events/new
   def new
+    authorize! :create, Event
     @event = Event.new
     @event.build_team_structure
   end
 
   # GET /events/1/edit
   def edit
+    authorize! :update, @event
   end
 
   # POST /events
   # POST /events.json
   def create
+    authorize! :create, Event
     @event = Event.new(event_params)
-    authorize! :create, @event
 
     respond_to do |format|
       if @event.save
