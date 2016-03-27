@@ -1,0 +1,37 @@
+<div class="page-header">
+  <%= link_to new_team_struсture_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    New Team struсture
+  <% end %>
+  <h1>Listing team_struсtures</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+            <th>Event</th>
+            <th>Sportsmen</th>
+            <th>Judges</th>
+            <th>Trainers</th>
+            <th>Delegates</th>
+            <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @team_struсtures) do |team_struсture| %>
+            <td><%= team_struсture.event %></td>
+            <td><%= team_struсture.sportsmen %></td>
+            <td><%= team_struсture.judges %></td>
+            <td><%= team_struсture.trainers %></td>
+            <td><%= team_struсture.delegates %></td>
+            <td><%= link_to 'Show', team_struсture %></td>
+        <td><%= link_to 'Edit', edit_team_struсture_path(team_struсture) %></td>
+        <td><%= link_to 'Destroy', team_struсture, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>

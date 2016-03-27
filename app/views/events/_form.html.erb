@@ -43,6 +43,11 @@
     </div>
   </div>
   <div class="form-group">
+    <%= f.fields_for :team_structure do |ft| %>
+      <%= render 'team_structure_fields', ft: ft %>
+    <% end %>
+  </div>
+  <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <%= f.submit class: "btn btn-primary" %>
     </div>
