@@ -28,18 +28,16 @@
 
   <h3>Event structure</h3>
 
-  <% @event.team_structure.each do |structure| %>
-      <dt>Sportsmen:</dt>
-      <dd><%= structure.sportsmen %></dd>
+  <dt>Sportsmen:</dt>
+  <dd><%= @event.team_structure['sportsmen'] %></dd>
 
-      <dt>Judges:</dt>
-      <dd><%= structure.judges %></dd>
+  <dt>Judges:</dt>
+  <dd><%= @event.team_structure['judges'] %></dd>
 
-      <dt>Trainers:</dt>
-      <dd><%= structure.trainers %></dd>
+  <dt>Trainers:</dt>
+  <dd><%= @event.team_structure['trainers'] %></dd>
 
-      <dt>Delegates:</dt>
-      <dd><%= structure.delegates %></dd>
-  <% end %>
+  <dt>Delegates:</dt>
+  <dd><%= @event.team_structure['delegates'] %></dd>
 
 </dl>
