@@ -26,6 +26,7 @@ class PeopleController < ApplicationController
   # POST /people.json
   def create
     @person = Person.new(person_params)
+    authorize! :create, @person
 
     respond_to do |format|
       if @person.save

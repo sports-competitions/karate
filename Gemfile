@@ -51,6 +51,10 @@ gem 'devise', '~> 3.5', '>= 3.5.5'
 
 # bootstrap
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
+#bootstrap-datepicker
+gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails',
+    :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
+
 # font-awesome icons
 gem 'font-awesome-rails'
 gem 'access-granted', '~> 1.0.0'
