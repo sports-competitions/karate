@@ -1,5 +1,5 @@
 <div class="page-header">
-  <%= link_to new_combat_path, class: 'btn btn-primary' do %>
+  <%= link_to new_event_combat_path, class: 'btn btn-primary' do %>
     <span class="glyphicon glyphicon-plus"></span>
     New Combat
   <% end %>
@@ -36,9 +36,9 @@
             <td><%= combat.end_weight %></td>
             <td><%= combat.team %></td>
             <td><%= combat.sex %></td>
-            <td><%= link_to 'Show', combat %></td>
-        <td><%= link_to 'Edit', edit_combat_path(combat) %></td>
-        <td><%= link_to 'Destroy', combat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= link_to 'Show', event_combat_path(@event, combat) %></td>
+        <td><%= link_to 'Edit', edit_event_combat_path(@event, combat) %></td>
+        <td><%= link_to 'Destroy', event_combat_path(@event, combat), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       <% end %>
     </tbody>
   </table>

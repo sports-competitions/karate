@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
-  resources :combats
-  resources :combats
-  resources :events
+  resources :events do
+    resources :combats
+  end
   resources :people
   root 'pages#index'
 

@@ -1,7 +1,7 @@
 class CreateCombats < ActiveRecord::Migration
   def change
     create_table :combats do |t|
-      t.refences :event
+      t.references :event, index: true, foreign_key: true
       t.string :name
       t.integer :min_rank
       t.integer :start_age

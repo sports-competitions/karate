@@ -1,10 +1,11 @@
 class CombatsController < ApplicationController
+  before_action :set_event
   before_action :set_combat, only: [:show, :edit, :update, :destroy]
 
   # GET /combats
   # GET /combats.json
   def index
-    @combats = Combat.all
+    @combats = @event.combats
   end
 
   # GET /combats/1
@@ -14,7 +15,7 @@ class CombatsController < ApplicationController
 
   # GET /combats/new
   def new
-    @combat = Combat.new
+    @combat = @event.combats.build
   end
 
   # GET /combats/1/edit
@@ -24,11 +25,11 @@ class CombatsController < ApplicationController
   # POST /combats
   # POST /combats.json
   def create
-    @combat = Combat.new(combat_params)
+    @combat = @event.combats.build(combat_params)
 
     respond_to do |format|
       if @combat.save
-        format.html { redirect_to @combat, notice: 'Combat was successfully created.' }
+        format.html { redirect_to event_combat_url(@event, @combat), notice: 'Combat was successfully created.' }
         format.json { render :show, status: :created, location: @combat }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class CombatsController < ApplicationController
   def update
     respond_to do |format|
       if @combat.update(combat_params)
-        format.html { redirect_to @combat, notice: 'Combat was successfully updated.' }
+        format.html { redirect_to event_combat_url(@event, @combat), notice: 'Combat was successfully updated.' }
         format.json { render :show, status: :ok, location: @combat }
       else
         format.html { render :edit }
@@ -56,19 +57,23 @@ class CombatsController < ApplicationController
   def destroy
     @combat.destroy
     respond_to do |format|
-      format.html { redirect_to combats_url, notice: 'Combat was successfully destroyed.' }
+      format.html { redirect_to event_combats_path, notice: 'Combat was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
+
+  def set_event
+    @event = Event.find(params[:event_id])
+  end
     # Use callbacks to share common setup or constraints between actions.
     def set_combat
-      @combat = Combat.find(params[:id])
+      @combat = @event.combats.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def combat_params
-      params.require(:combat).permit(:event, :name, :min_rank, :start_age, :end_age, :start_weight, :end_weight, :team, :sex)
+      params.require(:combat).permit(:name, :min_rank, :start_age, :end_age, :start_weight, :end_weight, :team, :sex)
     end
 end
