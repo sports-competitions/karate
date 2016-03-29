@@ -1,5 +1,5 @@
 <div class="page-header">
-  <% if registrator_signed_in? && can?(:create, Event) %>
+  <% if can?(:create, Event) %>
     <%= link_to new_event_path, class: 'btn btn-primary' do %>
       <span class="glyphicon glyphicon-plus"></span>
       New Event

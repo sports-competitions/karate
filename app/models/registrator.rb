@@ -4,6 +4,7 @@ class Registrator < ActiveRecord::Base
   enum role: [ :user, :admin ]
 
   has_many :people
+  has_many :registers
 
   validates_presence_of :first_name, :middle_name, :last_name
 
