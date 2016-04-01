@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160329045954) do
+ActiveRecord::Schema.define(version: 20160401131720) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,14 @@ ActiveRecord::Schema.define(version: 20160329045954) do
   end
 
   add_index "combats", ["event_id"], name: "index_combats_on_event_id", using: :btree
+
+  create_table "combats_people", force: :cascade do |t|
+    t.integer "person_id"
+    t.integer "combat_id"
+  end
+
+  add_index "combats_people", ["combat_id"], name: "index_combats_people_on_combat_id", using: :btree
+  add_index "combats_people", ["person_id"], name: "index_combats_people_on_person_id", using: :btree
 
   create_table "events", force: :cascade do |t|
     t.string   "name"
@@ -57,6 +65,14 @@ ActiveRecord::Schema.define(version: 20160329045954) do
   end
 
   add_index "people", ["registrator_id"], name: "index_people_on_registrator_id", using: :btree
+
+  create_table "people_registers", force: :cascade do |t|
+    t.integer "person_id"
+    t.integer "register_id"
+  end
+
+  add_index "people_registers", ["person_id"], name: "index_people_registers_on_person_id", using: :btree
+  add_index "people_registers", ["register_id"], name: "index_people_registers_on_register_id", using: :btree
 
   create_table "registers", force: :cascade do |t|
     t.integer  "registrator_id"

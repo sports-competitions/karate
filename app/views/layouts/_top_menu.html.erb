@@ -20,7 +20,7 @@
         <% end %>
         <% if registrator_signed_in? %>
           <%= content_tag :li, class: current_page?(people_path) ? "active" : "" do %>
-            <%= link_to "Peoples", people_path %>
+            <%= link_to "People", people_path %>
           <% end %>
         <% end %>
       </ul>
