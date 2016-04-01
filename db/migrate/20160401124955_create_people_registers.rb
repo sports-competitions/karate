@@ -1,6 +1,6 @@
 class CreatePeopleRegisters < ActiveRecord::Migration
   def change
-    create_table :people_registers do |t|
+    create_table :people_registers, id: false do |t|
       t.integer :person_id
       t.integer :register_id
     end

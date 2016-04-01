@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20160401142133) do
 
   add_index "combats", ["event_id"], name: "index_combats_on_event_id", using: :btree
 
-  create_table "combats_people", force: :cascade do |t|
+  create_table "combats_people", id: false, force: :cascade do |t|
     t.integer "person_id"
     t.integer "combat_id"
   end
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 20160401142133) do
 
   add_index "people", ["registrator_id"], name: "index_people_on_registrator_id", using: :btree
 
-  create_table "people_registers", force: :cascade do |t|
+  create_table "people_registers", id: false, force: :cascade do |t|
     t.integer "person_id"
     t.integer "register_id"
   end
@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 20160401142133) do
   add_index "people_registers", ["person_id"], name: "index_people_registers_on_person_id", using: :btree
   add_index "people_registers", ["register_id"], name: "index_people_registers_on_register_id", using: :btree
 
-  create_table "people_teams", force: :cascade do |t|
+  create_table "people_teams", id: false, force: :cascade do |t|
     t.integer "person_id"
     t.integer "team_id"
   end

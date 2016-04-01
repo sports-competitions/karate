@@ -1,6 +1,6 @@
 class CreateCombatsPeople < ActiveRecord::Migration
   def change
-    create_table :combats_people do |t|
+    create_table :combats_people, id: false do |t|
       t.integer :person_id
       t.integer :combat_id
     end
