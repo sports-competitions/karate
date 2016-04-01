@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
   resources :events do
-    resources :combats
+    resources :combats do
+      resources :teams
+    end
     resources :registers
   end
   resources :people

@@ -37,3 +37,10 @@
   <dd><%= @combat.sex %></dd>
 
 </dl>
+
+<h3>Teams(команды)</h3>
+<p>
+  <% @combat.teams.each do |team| %>
+      <%= link_to team.number.to_s + ', ', event_combat_team_path(@event, @combat, team) %>
+  <% end %>
+</p>
