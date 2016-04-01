@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160401131720) do
+ActiveRecord::Schema.define(version: 20160401133101) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,8 +112,18 @@ ActiveRecord::Schema.define(version: 20160401131720) do
   add_index "registrators", ["email"], name: "index_registrators_on_email", unique: true, using: :btree
   add_index "registrators", ["reset_password_token"], name: "index_registrators_on_reset_password_token", unique: true, using: :btree
 
+  create_table "teams", force: :cascade do |t|
+    t.integer  "number"
+    t.integer  "combat_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "teams", ["combat_id"], name: "index_teams_on_combat_id", using: :btree
+
   add_foreign_key "combats", "events"
   add_foreign_key "people", "registrators"
   add_foreign_key "registers", "events"
   add_foreign_key "registers", "registrators"
+  add_foreign_key "teams", "combats"
 end

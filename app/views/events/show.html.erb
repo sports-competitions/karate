@@ -50,6 +50,13 @@
 
 </dl>
 
+<h3>Combats(категории)</h3>
+<p>
+  <% @event.combats.each do |combat| %>
+      <%= link_to combat.name + ', ', event_combat_path(@event, combat) %>
+  <% end %>
+</p>
+
 <h3>Registers(заявки)</h3>
 <p>
   <% @event.registers.each do |register| %>
