@@ -24,8 +24,8 @@
 
 <h3>Участники</h3>
 
-<% @sportsmans.each_with_index do |sportsman, index| %>
+<% @people.each_with_index do |person, index| %>
   <p>
-    <%= index+1 %> <%= sportsman.first_name %> <%= sportsman.last_name %>
+    <%= index+1 %> <%= person.full_name%>
   </p>
 <% end %>
