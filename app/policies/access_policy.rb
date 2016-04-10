@@ -6,6 +6,7 @@ class AccessPolicy
     role :admin, proc {|registrator| registrator && registrator.admin? } do
       can :manage, Person
       can :manage, Event
+      can :manage, Register
     end
 
     role :user, proc {|registrator| registrator && registrator.user? } do

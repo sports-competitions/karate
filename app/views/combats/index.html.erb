@@ -27,7 +27,7 @@
 
     <tbody>
       <%= content_tag_for(:tr, @combats) do |combat| %>
-            <td><%= combat.event %></td>
+            <td><%= combat.event.name %></td>
             <td><%= combat.name %></td>
             <td><%= combat.min_rank %></td>
             <td><%= combat.start_age %></td>
