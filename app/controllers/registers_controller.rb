@@ -2,6 +2,7 @@ class RegistersController < ApplicationController
   before_action :authenticate_registrator!
   before_action :set_event
   before_action :set_register, only: [:show, :edit, :update, :destroy]
+  before_action :set_people, only: [:new, :edit, :update]
 
   # GET /registers
   # GET /registers.json
@@ -12,6 +13,7 @@ class RegistersController < ApplicationController
   # GET /registers/1
   # GET /registers/1.json
   def show
+    @people = @register.people
   end
 
   # GET /registers/new
@@ -66,9 +68,13 @@ class RegistersController < ApplicationController
 
   private
 
-  def set_event
-    @event = Event.find(params[:event_id])
-  end
+    def set_event
+      @event = Event.find(params[:event_id])
+    end
+
+    def set_people
+      @people = Person.where(kind: "sportsman").where(registrator: current_registrator)
+    end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_register
@@ -77,6 +83,6 @@ class RegistersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def register_params
-      params.require(:register).permit(:event_id, :name)
+      params.require(:register).permit(:event_id, :name, person_ids: [])
     end
 end
