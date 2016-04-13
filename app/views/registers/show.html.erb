@@ -1,0 +1,31 @@
+<div class="page-header">
+  <%= link_to event_registers_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <%= link_to edit_event_register_path(@event, @register), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Edit
+  <% end %>
+  <h1>Show register</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Registrator:</dt>
+  <dd><%= @register.registrator.last_name %></dd>
+
+  <dt>Event:</dt>
+  <dd><%= @register.event.name %></dd>
+
+  <dt>Name:</dt>
+  <dd><%= @register.name %></dd>
+
+</dl>
+
+<h3>Участники</h3>
+
+<% @people.each_with_index do |person, index| %>
+  <p>
+    <%= index+1 %> <%= person.full_name%>
+  </p>
+<% end %>

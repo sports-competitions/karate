@@ -1,19 +1,19 @@
 <%= ft.label :sportsmen, class: 'col-sm-4 col-md-2 control-label' %>
 <div class="col-sm-2 col-md-1">
-  <%= ft.number_field :sportsmen, class: 'form-control' %>
+  <%= ft.number_field :sportsmen, class: 'form-control', value: @event.team_structure['sportsmen'] || 0 %>
 </div>
 
 <%= ft.label :judges, class: 'col-sm-4 col-md-2 control-label' %>
 <div class="col-sm-2 col-md-1">
-  <%= ft.number_field :judges, class: 'form-control' %>
+  <%= ft.number_field :judges, class: 'form-control', value: @event.team_structure['judges'] || 0 %>
 </div>
 
 <%= ft.label :trainers, class: 'col-sm-4 col-md-2 control-label' %>
 <div class="col-sm-2 col-md-1">
-  <%= ft.number_field :trainers, class: 'form-control' %>
+  <%= ft.number_field :trainers, class: 'form-control', value: @event.team_structure['trainers'] || 0 %>
 </div>
 
 <%= ft.label :delegates, class: 'col-sm-4 col-md-2 control-label' %>
 <div class="col-sm-2 col-md-1">
-  <%= ft.number_field :delegates, class: 'form-control' %>
+  <%= ft.number_field :delegates, class: 'form-control', value: @event.team_structure['delegates'] || 0 %>
 </div>

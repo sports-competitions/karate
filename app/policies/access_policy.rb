@@ -3,13 +3,14 @@ class AccessPolicy
 
   def configure
 
-    role :admin, proc {|registrator| registrator.present? and registrator.admin? } do
+    role :admin, proc {|registrator| registrator && registrator.admin? } do
       can :manage, Person
       can :manage, Event
+      can :manage, Register
     end
 
-    role :user, proc {|registrator| registrator.present? and registrator.user? } do
-      can [:create, :update, :destroy], Person do |person, registrator|
+    role :user, proc {|registrator| registrator && registrator.user? } do
+      can [:read, :update, :destroy], Person do |person, registrator|
         person.registrator == registrator
       end
     end

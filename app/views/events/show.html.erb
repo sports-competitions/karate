@@ -7,6 +7,14 @@
     <span class="glyphicon glyphicon-pencil"></span>
     Edit
   <% end %>
+  <%= link_to new_event_combat_path(@event), class: 'btn btn-info' do %>
+      <span class="glyphicon glyphicon-plus"></span>
+      Добавить категорию
+  <% end %>
+  <%= link_to new_event_register_path(@event), class: 'btn btn-success' do %>
+      <span class="glyphicon glyphicon-plus"></span>
+      Подать заявку
+  <% end %>
   <h1>Show event</h1>
 </div>
 
@@ -28,18 +36,30 @@
 
   <h3>Event structure</h3>
 
-  <% @event.team_structure.each do |structure| %>
-      <dt>Sportsmen:</dt>
-      <dd><%= structure.sportsmen %></dd>
+  <dt>Sportsmen:</dt>
+  <dd><%= @event.team_structure['sportsmen'] %></dd>
 
-      <dt>Judges:</dt>
-      <dd><%= structure.judges %></dd>
+  <dt>Judges:</dt>
+  <dd><%= @event.team_structure['judges'] %></dd>
 
-      <dt>Trainers:</dt>
-      <dd><%= structure.trainers %></dd>
+  <dt>Trainers:</dt>
+  <dd><%= @event.team_structure['trainers'] %></dd>
 
-      <dt>Delegates:</dt>
-      <dd><%= structure.delegates %></dd>
-  <% end %>
+  <dt>Delegates:</dt>
+  <dd><%= @event.team_structure['delegates'] %></dd>
 
 </dl>
+
+<h3>Combats(категории)</h3>
+<p>
+  <% @event.combats.each do |combat| %>
+      <%= link_to combat.name + ', ', event_combat_path(@event, combat) %>
+  <% end %>
+</p>
+
+<h3>Registers(заявки)</h3>
+<p>
+  <% @event.registers.each do |register| %>
+    <%= link_to register.name + ', ', event_register_path(@event, register) %>
+  <% end %>
+</p>

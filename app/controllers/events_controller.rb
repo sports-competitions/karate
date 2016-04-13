@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  before_action :authenticate_registrator!, except: [:index, :show]
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   # GET /events
@@ -14,19 +15,20 @@ class EventsController < ApplicationController
 
   # GET /events/new
   def new
+    authorize! :create, Event
     @event = Event.new
-    @event.build_team_structure
   end
 
   # GET /events/1/edit
   def edit
+    authorize! :update, @event
   end
 
   # POST /events
   # POST /events.json
   def create
+    authorize! :create, Event
     @event = Event.new(event_params)
-    authorize! :create, @event
 
     respond_to do |format|
       if @event.save
@@ -73,6 +75,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :address, :start_date, :end_date, :details, team_structure_attributes: [:sportsmen, :judges, :trainers, :delegates])
+      params.require(:event).permit(:name, :address, :start_date, :end_date, :details, team_structure: [:sportsmen, :judges, :trainers, :delegates])
     end
 end

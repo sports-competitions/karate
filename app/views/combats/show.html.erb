@@ -1,0 +1,46 @@
+<div class="page-header">
+  <%= link_to event_combats_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <%= link_to edit_event_combat_path(@event, @combat), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Edit
+  <% end %>
+  <h1>Show combat</h1>
+</div>
+
+<dl class="dl-horizontal">
+
+  <dt>Name:</dt>
+  <dd><%= @combat.name %></dd>
+
+  <dt>Min rank:</dt>
+  <dd><%= @combat.min_rank %></dd>
+
+  <dt>Start age:</dt>
+  <dd><%= @combat.start_age %></dd>
+
+  <dt>End age:</dt>
+  <dd><%= @combat.end_age %></dd>
+
+  <dt>Start weight:</dt>
+  <dd><%= @combat.start_weight %></dd>
+
+  <dt>End weight:</dt>
+  <dd><%= @combat.end_weight %></dd>
+
+  <dt>Team:</dt>
+  <dd><%= @combat.team %></dd>
+
+  <dt>Sex:</dt>
+  <dd><%= @combat.sex %></dd>
+
+</dl>
+
+<h3>Teams(команды)</h3>
+<p>
+  <% @combat.teams.each do |team| %>
+      <%= link_to team.number.to_s + ', ', event_combat_team_path(@event, @combat, team) %>
+  <% end %>
+</p>
