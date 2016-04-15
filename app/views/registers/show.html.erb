@@ -1,28 +1,25 @@
 <div class="page-header">
   <%= link_to event_registers_path, class: 'btn btn-default' do %>
     <span class="glyphicon glyphicon-list-alt"></span>
-    Back
+    Назад
   <% end %>
   <%= link_to edit_event_register_path(@event, @register), class: 'btn btn-primary' do %>
     <span class="glyphicon glyphicon-pencil"></span>
-    Edit
+    Редагувати
   <% end %>
-  <h1>Show register</h1>
+  <h1>Заявка: <%= @register.name %></h1>
 </div>
 
 <dl class="dl-horizontal">
-  <dt>Registrator:</dt>
+  <dt>Реєстратор:</dt>
   <dd><%= @register.registrator.last_name %></dd>
 
-  <dt>Event:</dt>
+  <dt>Подія:</dt>
   <dd><%= @register.event.name %></dd>
-
-  <dt>Name:</dt>
-  <dd><%= @register.name %></dd>
 
 </dl>
 
-<h3>Участники</h3>
+<h3>Учасники</h3>
 
 <% @people.each_with_index do |person, index| %>
   <p>
