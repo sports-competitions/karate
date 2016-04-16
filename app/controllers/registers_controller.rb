@@ -10,10 +10,14 @@ class RegistersController < ApplicationController
 
   def show
     @people = @register.people
+    @combats = @event.combats
   end
 
   def select_combats
-    @people = @register.people
+    @person = Person.find(params[:person][:person_id])
+    if @person.update(select_combats_params)
+      redirect_to event_register_url(@event, @register)
+    end
   end
 
   def new
@@ -74,5 +78,9 @@ class RegistersController < ApplicationController
 
     def register_params
       params.require(:register).permit(:event_id, :name, person_ids: [])
+    end
+
+    def select_combats_params
+      params.require(:person).permit(combat_ids: [])
     end
 end
