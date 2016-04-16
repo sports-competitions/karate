@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   resources :events do
     resources :combats
     resources :registers
+    get 'registers/:id/select_combats' =>'registers#select_combats', as: :select_combats
+    post 'registers/:id/select_combats' =>'registers#select_combats'
   end
   resources :people
   root 'pages#index'

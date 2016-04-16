@@ -1,14 +1,18 @@
 class RegistersController < ApplicationController
   before_action :authenticate_registrator!
   before_action :set_event
-  before_action :set_register, only: [:show, :edit, :update, :destroy]
-  before_action :set_people, only: [:new, :edit, :update]
+  before_action :set_register, only: [:show, :edit, :update, :destroy, :select_combats]
+  before_action :set_people, only: [:new, :edit, :update, :select_combats]
 
   def index
     @registers = @event.registers
   end
 
   def show
+    @people = @register.people
+  end
+
+  def select_combats
     @people = @register.people
   end
 
