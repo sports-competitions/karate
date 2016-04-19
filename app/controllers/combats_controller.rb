@@ -1,5 +1,5 @@
 class CombatsController < ApplicationController
-  before_action :authenticate_registrator!
+  before_action :authenticate_user!
   before_action :set_event
   before_action :set_combat, only: [:show, :edit, :update, :destroy]
 

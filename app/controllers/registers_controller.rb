@@ -1,5 +1,5 @@
 class RegistersController < ApplicationController
-  before_action :authenticate_registrator!
+  before_action :authenticate_user!
   before_action :set_event
   before_action :set_register, only: [:show, :edit, :update, :destroy, :select_combats]
   before_action :set_people, only: [:new, :edit, :update, :select_combats]
@@ -29,7 +29,7 @@ class RegistersController < ApplicationController
 
   def create
     @register = @event.registers.build(register_params)
-    @register.registrator = current_registrator
+    @register.user = current_user
 
     respond_to do |format|
       if @register.save
@@ -69,7 +69,7 @@ class RegistersController < ApplicationController
     end
 
     def set_people
-      @people = Person.where(kind: "sportsman").where(registrator: current_registrator)
+      @people = Person.where(kind: "sportsman").where(user: current_user)
     end
 
     def set_register

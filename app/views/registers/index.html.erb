@@ -21,7 +21,7 @@
 
     <tbody>
       <%= content_tag_for(:tr, @registers) do |register| %>
-        <td><%= register.registrator.first_name %> <%= register.registrator.last_name %></td>
+        <td><%= register.user.first_name %> <%= register.user.last_name %></td>
         <td><%= register.event.name %></td>
         <td><%= register.name %></td>
         <td><%= link_to 'Показати', event_register_path(@event, register) %></td>

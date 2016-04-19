@@ -1,5 +1,5 @@
 class Person < ActiveRecord::Base
-  belongs_to :registrator
+  belongs_to :user
   has_and_belongs_to_many :registers
   has_and_belongs_to_many :combats
   has_and_belongs_to_many :teams

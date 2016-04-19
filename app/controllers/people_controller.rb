@@ -1,11 +1,11 @@
 class PeopleController < ApplicationController
-  before_action :authenticate_registrator!
+  before_action :authenticate_user!
   before_action :set_person, only: [:show, :edit, :update, :destroy]
 
   # GET /people
   # GET /people.json
   def index
-    @people = current_registrator.people
+    @people = current_user.people
   end
 
   # GET /people/1
@@ -16,7 +16,7 @@ class PeopleController < ApplicationController
 
   # GET /people/new
   def new
-    @person = current_registrator.people.build
+    @person = current_user.people.build
   end
 
   # GET /people/1/edit
@@ -27,7 +27,7 @@ class PeopleController < ApplicationController
   # POST /people
   # POST /people.json
   def create
-    @person = current_registrator.people.build(person_params)
+    @person = current_user.people.build(person_params)
 
     respond_to do |format|
       if @person.save

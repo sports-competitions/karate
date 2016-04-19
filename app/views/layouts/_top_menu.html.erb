@@ -18,7 +18,7 @@
         <%= content_tag :li, class: current_page?(events_path) ? "active" : "" do %>
           <%= link_to "Events", events_path %>
         <% end %>
-        <% if registrator_signed_in? %>
+        <% if user_signed_in? %>
           <%= content_tag :li, class: current_page?(people_path) ? "active" : "" do %>
             <%= link_to "People", people_path %>
           <% end %>
@@ -26,23 +26,23 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <% if registrator_signed_in? %>
+        <% if user_signed_in? %>
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              <%= current_registrator.first_name %>&nbsp;<%= current_registrator.middle_name %>
+              <%= current_user.first_name %>&nbsp;<%= current_user.middle_name %>
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu" role="menu">
-              <li><%= link_to('Edit registration', edit_registrator_registration_path) %></li>
-              <li><%= link_to('Logout', destroy_registrator_session_path, :method => :delete) %></li>
+              <li><%= link_to('Edit registration', edit_user_registration_path) %></li>
+              <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
             </ul>
           </li>
         <% else %>
-          <%= content_tag :li, class: current_page?(new_registrator_session_path) ? "active" : "" do %>
-            <%= link_to('Login', new_registrator_session_path)  %>
+          <%= content_tag :li, class: current_page?(new_user_session_path) ? "active" : "" do %>
+            <%= link_to('Login', new_user_session_path)  %>
           <% end %>
-          <%= content_tag :li, class: current_page?(new_registrator_registration_path) ? "active" : "" do %>
-            <%= link_to('Register', new_registrator_registration_path)  %>
+          <%= content_tag :li, class: current_page?(new_user_registration_path) ? "active" : "" do %>
+            <%= link_to('Register', new_user_registration_path)  %>
           <% end %>
         <% end %>
       </ul>

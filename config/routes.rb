@@ -9,5 +9,5 @@ Rails.application.routes.draw do
   resources :people
   root 'pages#index'
 
-  devise_for :registrators, controllers: {registrations: 'registrators/registrations' }
+  devise_for :users, controllers: {registrations: 'users/registrations' }
 end

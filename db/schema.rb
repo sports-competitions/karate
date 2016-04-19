@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160401142133) do
+ActiveRecord::Schema.define(version: 20160419180658) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,19 +52,19 @@ ActiveRecord::Schema.define(version: 20160401142133) do
   end
 
   create_table "people", force: :cascade do |t|
-    t.integer  "registrator_id"
-    t.string   "first_name",     default: "", null: false
-    t.string   "middle_name",    default: "", null: false
-    t.string   "last_name",      default: "", null: false
-    t.date     "birthday",                    null: false
-    t.string   "sex",            default: "", null: false
-    t.string   "kind",           default: "", null: false
+    t.integer  "user_id"
+    t.string   "first_name",  default: "", null: false
+    t.string   "middle_name", default: "", null: false
+    t.string   "last_name",   default: "", null: false
+    t.date     "birthday",                 null: false
+    t.string   "sex",         default: "", null: false
+    t.string   "kind",        default: "", null: false
     t.string   "kind_data"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
-  add_index "people", ["registrator_id"], name: "index_people_on_registrator_id", using: :btree
+  add_index "people", ["user_id"], name: "index_people_on_user_id", using: :btree
 
   create_table "people_registers", id: false, force: :cascade do |t|
     t.integer "person_id"
@@ -83,17 +83,26 @@ ActiveRecord::Schema.define(version: 20160401142133) do
   add_index "people_teams", ["team_id"], name: "index_people_teams_on_team_id", using: :btree
 
   create_table "registers", force: :cascade do |t|
-    t.integer  "registrator_id"
+    t.integer  "user_id"
     t.integer  "event_id"
     t.string   "name"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "registers", ["event_id"], name: "index_registers_on_event_id", using: :btree
-  add_index "registers", ["registrator_id"], name: "index_registers_on_registrator_id", using: :btree
+  add_index "registers", ["user_id"], name: "index_registers_on_user_id", using: :btree
 
-  create_table "registrators", force: :cascade do |t|
+  create_table "teams", force: :cascade do |t|
+    t.integer  "number"
+    t.integer  "combat_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "teams", ["combat_id"], name: "index_teams_on_combat_id", using: :btree
+
+  create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.integer  "role",                   default: 0,  null: false
@@ -116,22 +125,13 @@ ActiveRecord::Schema.define(version: 20160401142133) do
     t.datetime "updated_at",                          null: false
   end
 
-  add_index "registrators", ["confirmation_token"], name: "index_registrators_on_confirmation_token", unique: true, using: :btree
-  add_index "registrators", ["email"], name: "index_registrators_on_email", unique: true, using: :btree
-  add_index "registrators", ["reset_password_token"], name: "index_registrators_on_reset_password_token", unique: true, using: :btree
-
-  create_table "teams", force: :cascade do |t|
-    t.integer  "number"
-    t.integer  "combat_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "teams", ["combat_id"], name: "index_teams_on_combat_id", using: :btree
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "combats", "events"
-  add_foreign_key "people", "registrators"
+  add_foreign_key "people", "users"
   add_foreign_key "registers", "events"
-  add_foreign_key "registers", "registrators"
+  add_foreign_key "registers", "users"
   add_foreign_key "teams", "combats"
 end

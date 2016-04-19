@@ -8,8 +8,4 @@ class ApplicationController < ActionController::Base
     redirect_to root_path
   end
 
-  def current_user
-    current_registrator
-  end
-
 end

@@ -1,7 +1,7 @@
-class Registrator < ActiveRecord::Base
+class User < ActiveRecord::Base
 
   enum sex: [ :male, :female ]
-  enum role: [ :user, :admin ]
+  enum role: [ :registrator, :admin ]
 
   has_many :people
   has_many :registers
