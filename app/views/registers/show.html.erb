@@ -1,0 +1,74 @@
+<div class="page-header">
+  <%= link_to event_registers_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Назад
+  <% end %>
+  <%= link_to edit_event_register_path(@event, @register), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Редагувати
+  <% end %>
+  <h1>Заявка: <%= @register.name %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Реєстратор:</dt>
+  <dd><%= @register.registrator.last_name %></dd>
+
+  <dt>Подія:</dt>
+  <dd><%= @register.event.name %></dd>
+
+</dl>
+
+<h3>Учасники</h3>
+<div class="table-responsive">
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>ПІБ</th>
+        <% @event.combats.each do |combat| %>
+          <th><%= combat.name %></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% @people.each_with_index do |person, index| %>
+        <tr>
+          <td>
+            <%= index+1 %>
+          </td>
+          <td>
+            <%= person.full_name %>
+          </td>
+            <% @event.combats.each do |combat| %>
+              <td>
+                <% if person.combats.include?(combat) %>
+                  +
+                <% else %>
+                  -
+                <% end %>
+              </td>
+            <% end %>
+            <td>
+              <%= link_to "визначити категорію", '#', person_id: person, "data-target": "#modal_role_#{person.id}", "data-toggle": "modal"  %>
+            </td>
+        </tr>
+
+        <div id='<%= "modal_role_#{person.id}" %>'class="modal fade">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Визначення категорії для: <%= person.full_name %></h4>
+              </div>
+              <div class="modal-body">
+                <%= render "form_select_combat", person: person %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <% end %>
+    </tbody>
+  </table>
+</div>

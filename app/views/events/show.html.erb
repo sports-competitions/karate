@@ -1,0 +1,65 @@
+<div class="page-header">
+  <%= link_to events_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <%= link_to edit_event_path(@event), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Edit
+  <% end %>
+  <%= link_to new_event_combat_path(@event), class: 'btn btn-info' do %>
+      <span class="glyphicon glyphicon-plus"></span>
+      Добавить категорию
+  <% end %>
+  <%= link_to new_event_register_path(@event), class: 'btn btn-success' do %>
+      <span class="glyphicon glyphicon-plus"></span>
+      Подать заявку
+  <% end %>
+  <h1>Show event</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Name:</dt>
+  <dd><%= @event.name %></dd>
+
+  <dt>Address:</dt>
+  <dd><%= @event.address %></dd>
+
+  <dt>Start date:</dt>
+  <dd><%= @event.start_date %></dd>
+
+  <dt>End date:</dt>
+  <dd><%= @event.end_date %></dd>
+
+  <dt>Details:</dt>
+  <dd><%= @event.details %></dd>
+
+  <h3>Event structure</h3>
+
+  <dt>Sportsmen:</dt>
+  <dd><%= @event.team_structure['sportsmen'] %></dd>
+
+  <dt>Judges:</dt>
+  <dd><%= @event.team_structure['judges'] %></dd>
+
+  <dt>Trainers:</dt>
+  <dd><%= @event.team_structure['trainers'] %></dd>
+
+  <dt>Delegates:</dt>
+  <dd><%= @event.team_structure['delegates'] %></dd>
+
+</dl>
+
+<h3>Combats(категории)</h3>
+<p>
+  <% @event.combats.each do |combat| %>
+      <%= link_to combat.name + ', ', event_combat_path(@event, combat) %>
+  <% end %>
+</p>
+
+<h3><%= link_to "Заявки", event_registers_path(@event) %> (<%= @event.registers.count %>)</h3>
+<p>
+  <% @event.registers.each do |register| %>
+    <%= link_to register.name + ', ', event_register_path(@event, register) %>
+  <% end %>
+</p>

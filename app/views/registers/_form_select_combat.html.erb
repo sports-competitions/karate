@@ -1,0 +1,22 @@
+<%= form_for(person, url: event_select_combats_path(@event, @register)) do |f| %>
+  <% if person.errors.any? %>
+    <div id="error_explanation">
+      <% person.errors.full_messages.each do |message| %>
+        <div class="alert alert-danger alert-dismissible fade in" role=alert>
+          <button type=button class=close data-dismiss=alert aria-label=Close>
+            <span aria-hidden=true>&times;</span>
+          </button>
+          <%= message %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="checkbox-list">
+    <%= f.collection_check_boxes(:combat_ids, @combats || [], :id, :name) %>
+    <%= f.hidden_field :person_id, value: person.id  %>
+  </div>
+  <div class="form-group">
+    <%= f.submit class: "btn btn-primary btn-block", value: "Зберегти" %>
+  </div>
+<% end %>

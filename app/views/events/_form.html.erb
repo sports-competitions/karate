@@ -1,0 +1,67 @@
+<%= form_for(@event, html: { class: "form-horizontal", role: "form" }) do |f| %>
+  <% if @event.errors.any? %>
+    <div class="alert alert-danger alert-dismissable" role="alert">
+      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <h4><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h4>
+
+      <ul>
+      <% @event.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :address, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :address, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :start_date, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.date_select :start_date, class: "datepicker form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :end_date, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.date_select :end_date, class: "datepicker form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :details, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_area :details, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.fields_for :team_structure do |ft| %>
+      <%= render 'team_structure_fields', ft: ft %>
+    <% end %>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
+
+<script>
+  $(document).ready(function(){
+    $('.datepicker').datepicker({
+      autoclose: true,
+      language: 'ru',
+      todayHighlight: true,
+      orientation: 'auto top',
+      format: 'yyyy-mm-dd'
+    });
+  });
+</script>

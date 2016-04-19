@@ -23,13 +23,6 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
-# devise for user authentication
-gem 'devise', '~> 3.5', '>= 3.5.5'
-# bootstrap
-gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
-# font-awesome icons
-gem "font-awesome-rails"
-
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -52,4 +45,17 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
+
+# devise for user authentication
+gem 'devise', '~> 3.5', '>= 3.5.5'
+
+# bootstrap
+gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
+#bootstrap-datepicker
+gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails',
+    :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
+
+# font-awesome icons
+gem 'font-awesome-rails'
+gem 'access-granted', '~> 1.0.0'
 
