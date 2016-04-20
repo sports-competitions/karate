@@ -16,6 +16,15 @@ ActiveRecord::Schema.define(version: 20160401142133) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "cities", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "cities", ["user_id"], name: "index_cities_on_user_id", using: :btree
+
   create_table "combats", force: :cascade do |t|
     t.integer  "event_id"
     t.string   "name"
@@ -82,6 +91,18 @@ ActiveRecord::Schema.define(version: 20160401142133) do
   add_index "people_teams", ["person_id"], name: "index_people_teams_on_person_id", using: :btree
   add_index "people_teams", ["team_id"], name: "index_people_teams_on_team_id", using: :btree
 
+  create_table "qualifications", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "view"
+    t.integer  "sport_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "qualifications", ["sport_id"], name: "index_qualifications_on_sport_id", using: :btree
+  add_index "qualifications", ["user_id"], name: "index_qualifications_on_user_id", using: :btree
+
   create_table "registers", force: :cascade do |t|
     t.integer  "registrator_id"
     t.integer  "event_id"
@@ -120,6 +141,20 @@ ActiveRecord::Schema.define(version: 20160401142133) do
   add_index "registrators", ["email"], name: "index_registrators_on_email", unique: true, using: :btree
   add_index "registrators", ["reset_password_token"], name: "index_registrators_on_reset_password_token", unique: true, using: :btree
 
+  create_table "sports", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "students_trainers", id: false, force: :cascade do |t|
+    t.integer "student_id"
+    t.integer "trainer_id"
+  end
+
+  add_index "students_trainers", ["student_id"], name: "index_students_trainers_on_student_id", using: :btree
+  add_index "students_trainers", ["trainer_id"], name: "index_students_trainers_on_trainer_id", using: :btree
+
   create_table "teams", force: :cascade do |t|
     t.integer  "number"
     t.integer  "combat_id"
@@ -129,8 +164,45 @@ ActiveRecord::Schema.define(version: 20160401142133) do
 
   add_index "teams", ["combat_id"], name: "index_teams_on_combat_id", using: :btree
 
+  create_table "trainers", force: :cascade do |t|
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.integer  "sex",                    default: 0
+    t.date     "birthday"
+    t.integer  "weight"
+    t.integer  "role",                   default: 2
+    t.boolean  "student",                default: false
+    t.boolean  "trainer",                default: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,     null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
+  end
+
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["name"], name: "index_users_on_name", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  add_foreign_key "cities", "users"
   add_foreign_key "combats", "events"
   add_foreign_key "people", "registrators"
+  add_foreign_key "qualifications", "sports"
+  add_foreign_key "qualifications", "users"
   add_foreign_key "registers", "events"
   add_foreign_key "registers", "registrators"
   add_foreign_key "teams", "combats"
