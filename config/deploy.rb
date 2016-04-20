@@ -3,7 +3,7 @@ lock '3.4.0'
 server '46.101.147.156', port: 22, roles: [:web, :app, :db], primary: true
 
 set :repo_url,        'git@github.com:sports-competitions/karate.git'
-set :application,     'budmag'
+set :application,     'karate'
 set :user,            'deployer'
 set :puma_threads,    [4, 16]
 set :puma_workers,    0
